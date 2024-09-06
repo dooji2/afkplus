@@ -5,9 +5,12 @@ import io.github.sakuraryoko.afkplus.data.IAfkPlayer;
 import io.github.sakuraryoko.afkplus.util.AfkPlusInfo;
 import io.github.sakuraryoko.afkplus.util.AfkPlusLogger;
 import net.minecraft.network.ClientConnection;
+import net.minecraft.network.encryption.PlayerPublicKey;
 import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.GameMode;
+
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,7 +40,7 @@ public abstract class PlayerManagerMixin {
             iPlayer.afkplus$updatePlayerList();
     }
     @Inject(method = "createPlayer", at = @At("RETURN"))
-    private void checkInvulnerable2(GameProfile profile, CallbackInfoReturnable<ServerPlayerEntity> cir) {
+    private void checkInvulnerable2(GameProfile profile, @Nullable PlayerPublicKey publicKey, CallbackInfoReturnable<ServerPlayerEntity> cir) {
         ServerPlayerEntity playerEntity = cir.getReturnValue();
         IAfkPlayer iPlayer = (IAfkPlayer) playerEntity;
         if (playerEntity == null)
