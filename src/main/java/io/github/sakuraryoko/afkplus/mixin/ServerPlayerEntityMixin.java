@@ -84,7 +84,7 @@ public abstract class ServerPlayerEntityMixin extends Entity implements IAfkPlay
             sendAfkMessage(mess);
         } else {
             setAfkReason(reason);
-            String mess1 = CONFIG.messageOptions.whenAfk + "<yellow>,<r> " + reason;
+            String mess1 = CONFIG.messageOptions.whenAfk + reason;
             Text mess2 = Placeholders.parseText(TextParserUtils.formatTextSafe(mess1), PlaceholderContext.of(player));
             sendAfkMessage(mess2);
         }
